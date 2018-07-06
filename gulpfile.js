@@ -1,7 +1,7 @@
 
 			    
 			    // template a ser gerenciado
-			    var template = 'mundo';
+			    var template = 'bella-vip';
 
 			    // Template DIR
 			    var templateDir = 'templates/' + template;
@@ -10,13 +10,13 @@
 			    var baseDir = 'C:/xampp/htdocs/responsivo/'; 
 
 			    // CSS files DIR
-			    var cssDir  = templateDir + '/css';
+			    var cssDir  = baseDir + templateDir + '/css';
 
 			    // SASS files DIR 
-			    var sassDir = templateDir + '/sass';
+			    var sassDir = baseDir + templateDir + '/sass';
 
 			    // Images files DIR
-			    var imgDir  = templateDir + '/images';
+			    var imgDir  = baseDir + templateDir + '/images';
 
 
 			    //initialize all of our variables
