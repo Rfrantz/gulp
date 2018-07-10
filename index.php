@@ -10,6 +10,7 @@
   integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
   crossorigin="anonymous" type="text/javascript"></script>
 	<meta name="charset" content="utf-8">
+	<link rel="shortcut icon" type="image/icon" href="img/favicon.ico">
 	<!-- <link rel="stylesheet" href="autocomplete/autocomplete.min.css" type="text/css"> -->
 	<link rel="stylesheet" href="css/estilo.css" type="text/css">
 	<!-- <script src="autocomplete/autocomplete.min.js"></script> -->

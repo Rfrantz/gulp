@@ -1,7 +1,7 @@
 
 			    
 			    // template a ser gerenciado
-			    var template = 'bella-vip';
+			    var template = 'vivano';
 
 			    // Template DIR
 			    var templateDir = 'templates/' + template;
