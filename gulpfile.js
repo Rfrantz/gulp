@@ -1,7 +1,7 @@
 
 			    
 			    // template a ser gerenciado
-			    var template = 'vivano';
+			    var template = 'micapullo';
 
 			    // Template DIR
 			    var templateDir = 'templates/' + template;
