@@ -154,6 +154,15 @@
 		else
 			checkInput('0');
 	});
+	btnWatch.on('click', function(){
+		if(hasLi()){
+			onProcess(true);
+			// runGulp(collectList());
+		}
+		else
+			checkInput('0');
+		onProcess(true);
+	});
 </script>
 </body>
 </html>
