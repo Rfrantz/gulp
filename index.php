@@ -43,7 +43,7 @@
 <script type="text/javascript">
 	lstLayouts= $('#lstLayouts');
 	btnRun = 	$('#transpBtn');
-	btnWatch = 	$('watchBtn');
+	// btnWatch = 	$('watchBtn');
 	btnLayouts= $('#addBtn');
 	inputLay = 	$('#inputLay');
 	load = 		$('#loading');
