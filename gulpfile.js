@@ -1,7 +1,7 @@
 
 			    
 			    // template a ser gerenciado
-			    var template = 'micapullo';
+			    var template = 'dcm';
 
 			    // Template DIR
 			    var templateDir = 'templates/' + template;
@@ -20,7 +20,7 @@
 
 
 			    //initialize all of our variables
-			    var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, browserSync, autoprefixer, gulpSequence, shell, sourceMaps, plumber;
+			    var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, imagemin, minifyCSS, del, browserSync, autoprefixer, gulpSequence, sourceMaps, plumber;
 
 			    var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
@@ -52,76 +52,14 @@
 			    gulp        = require('gulp');
 			    sass        = require('gulp-sass');
 			    gutil       = require('gulp-util');
-			    shell       = require('gulp-shell');
 			    concat      = require('gulp-concat');
-			    uglify      = require('gulp-uglify');
 			    plumber     = require('gulp-plumber');
 			    browserSync = require('browser-sync');
-			    imagemin    = require('gulp-imagemin');
 			    minifyCSS   = require('gulp-minify-css');
 			    sourceMaps  = require('gulp-sourcemaps');
 			    autoprefixer = require('gulp-autoprefixer');
 			    gulpSequence = require('gulp-sequence').use(gulp);
 
-			    gulp.task('browserSync', function() {
-			        browserSync({
-			            server: {
-			                baseDir: baseDir
-			            },
-			            options: {
-			                reloadDelay: 250
-			            },
-			            notify: true
-			        });
-			    });
-
-
-			    //compressing images & handle SVG files
-			    gulp.task('images', function(tmp) {
-			        gulp.src([imgDir + '/*.jpg', imgDir + '/*.png'])
-			            //prevent pipe breaking caused by errors from gulp plugins
-			            .pipe(plumber())
-			            .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
-			            .pipe(gulp.dest(templateDir + '/images'));
-			    });
-
-			    //compressing images & handle SVG files
-			    gulp.task('images-deploy', function() {
-			        gulp.src([imgDir + '/*'])
-			            //prevent pipe breaking caused by errors from gulp plugins
-			            .pipe(plumber())
-			            .pipe(gulp.dest(templateDir + '/images'));
-			    });
-
-			    //compiling our Javascripts
-			    gulp.task('scripts', function() {
-			        //this is where our dev JS scripts are
-			        return gulp.src( jsConcatList )
-			                    //prevent pipe breaking caused by errors from gulp plugins
-			                    .pipe(plumber())
-			                    //this is the filename of the compressed version of our JS
-			                    .pipe(concat('app.e-store.js'))
-			                    //catch errors
-			                    .on('error', gutil.log)
-			                    //where we will store our finalized, compressed script
-			                    .pipe(gulp.dest('app/scripts'))
-			                    //notify browserSync to refresh
-			                    .pipe(browserSync.reload({stream: true}));
-			    });
-
-			    //compiling our Javascripts for deployment
-			    gulp.task('scripts-deploy', function() {
-			        //this is where our dev JS scripts are
-			        return gulp.src( jsConcatList )
-			                    //prevent pipe breaking caused by errors from gulp plugins
-			                    .pipe(plumber())
-			                    //this is the filename of the compressed version of our JS
-			                    .pipe(concat('com.IC.e-store.concatJS.js'))
-			                    //compress :D
-			                    .pipe(uglify())
-			                    //where we will store our finalized, compressed script
-			                    .pipe(gulp.dest('dist/scripts'));
-			    });
 
 			    //compiling our sass files
 			    gulp.task('sass', function() {
@@ -162,29 +100,6 @@
 			                    //.pipe(browserSync.reload({stream: true}));
 			    });
 
-			    //compiling our sass files for deployment
-			    gulp.task('styles-template', function() {
-			        //the initializer / master sass file, which will just be a file that imports everything
-			        console.log('-----------------------------   { CSS } ' + template + ' gerados com sucesso!   -----------------------------');
-			        return gulp.src(sassDir + '/*.sass')
-			                    .pipe(plumber())
-			                    //include sass includes folder
-			                    .pipe(sass({
-			                          includePaths: [
-			                              sassDir,
-			                          ]
-			                    }))
-			                    .pipe(autoprefixer({
-			                      browsers: autoPrefixBrowserList,
-			                      cascade:  true
-			                    }))
-			                    //the final filename of our combined css file
-			                    .pipe(concat('estilo.css'))
-			                    .pipe(minifyCSS())
-			                    //where to save our final, compressed css file
-			                    .pipe(gulp.dest( cssDir ));
-			    });
-
 
 			    //  minifier your css files on css dir
 			    gulp.task('styles-deploy', function() {
@@ -197,80 +112,6 @@
 			            .pipe(gulp.dest('dist/styles' ));
 			            console.log('-----------------------------   { CSS } externos concatenados com sucesso!   -----------------------------');
 			    });
-
-			    //basically just keeping an eye on all HTML files
-			    gulp.task('html', function() {
-			        //watch any and all HTML files and refresh when something changes
-			        return gulp.src('index.html')
-			            .pipe(plumber())
-			            .pipe(browserSync.reload({
-			                stream: true
-			            }))
-			            //catch errors
-			            .on('error', gutil.log);
-			    });
-
-			    //migrating over all HTML files for deployment
-			    gulp.task('html-deploy', gulp.series('styles-deploy', 'scripts-deploy', function() {
-
-			        //grab everything, which should include htaccess, robots, etc
-			        gulp.src('*.html')
-			            //prevent pipe breaking caused by errors from gulp plugins
-			            .pipe(plumber())
-			            .pipe(gulp.dest('dist'));
-
-			        //grab any hidden files too
-			        gulp.src('*.html')
-			            //prevent pipe breaking caused by errors from gulp plugins
-			            .pipe(plumber())
-			            .pipe(gulp.dest('dist'));
-
-			        gulp.src(templateDir + '/font/*')
-			            //prevent pipe breaking caused by errors from gulp plugins
-			            .pipe(plumber())
-			            .pipe(gulp.dest('dist/fonts'));
-			        gulp.src( cssConcatList )
-			            //prevent pipe breaking caused by errors from gulp plugins
-			            .pipe(concat('concat.css'))
-			                    .pipe(minifyCSS())
-			            .pipe(plumber())
-			            .pipe(gulp.dest('dist/styles' ));
-			        console.log('-----------------------------   { CSS } externos concatenados com sucesso!   -----------------------------');
-			    }));
-
-			    //cleans our dist directory in case things got deleted
-			    gulp.task('clean', function() {
-			        return shell.task([
-			          'rm -rf dist'
-			        ]);
-			    });
-
-			    //create folders using shell
-			    gulp.task('scaffold', function() {
-			      return shell.task([
-			          'mkdir dist',
-			          'mkdir dist/fonts',
-			          'mkdir dist/images',
-			          'mkdir dist/scripts',
-			          'mkdir dist/styles'
-			        ]
-			      );
-			    });
-
-			    //this is our master task when you run `gulp` in CLI / Terminal
-			    //this is the main watcher to use when in active development
-			    //  this will:
-			    //  startup the web server,
-			    //  start up browserSync
-			    //  compress all scripts and sass files
-			    gulp.task('default', gulp.series('browserSync', 'scripts', 'styles-template', function(styles) {
-			        //a list of watchers, so it will watch all of the following files waiting for changes
-			        gulp.watch('ext/**', ['scripts']);
-			        gulp.watch(sassDir + '/**', ['styles-template']);
-			        // gulp.watch(imgDir + '/**', ['images']);
-			        gulp.watch('app/*.html', ['html']);
-			    }));
-
 
 
 			    //
