@@ -1,0 +1,46 @@
+{
+  "name": "oscommerce-responsive",
+  "version": "2.0.0",
+  "description": "Loja virtual responsiva by Ideal Consult, Gumo - Web Solutions.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browser-sync": "^2.24.6",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-plumber": "^1.2.0",
+    "gulp-postcss": "^7.0.1",
+    "gulp-sass": "^4.0.1",
+    "gulp-sequence": "^0.4.6",
+    "gulp-shell": "^0.5.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^2.1.2",
+    "gulp-util": "^3.0.8",
+    "npm-windows-upgrade": "^4.1.1",
+    "postcss-font": "^1.0.4",
+    "postcss-hexrgba": "^1.0.1",
+    "vim": "^0.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-cli": "^2.0.1"
+  },
+  "scripts": {
+    "test": "gulp sass"
+  },
+  "author": "Raphael G. Frantz",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rfrantz/gulp.git"
+  },
+  "keywords": [
+    "gulp",
+    "tasker"
+  ],
+  "bugs": {
+    "url": "https://github.com/Rfrantz/gulp/issues"
+  },
+  "homepage": "https://github.com/Rfrantz/gulp#readme"
+}
